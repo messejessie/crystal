@@ -63,15 +63,64 @@ startGame = () => {
 
 //check win
 
-checkwin = () => {
+checkWin = () => {
     //check if current score is larger than target score
     if (currentScore > targetScore) {
         alert('You Lose!')
         console.log('You Lose')
+        //loss count
+        lossCount++;
+        //html
         $('#loss-count').text(lossCount);
+        //restart
+        startGame();
+    } else if (currentScore === targetScore) {
+        alert('You Win');
+        console.log('you win')
+        //counter 
+        winCount++
+        //html
+        $('#win-count').text(winCount);
         //restart
         startGame();
     }
 
 
-}
+};
+
+//getting Crystals to respond
+addValues = (clickedCrystal) => {
+    //change currentScore
+    currentScore += clickedCrystal.value;
+    // html to reflect current score 
+    $('#your-score').text(currentScore);
+
+    //check the win
+    checkWin();
+
+    // test
+    console.log('Your Score: '+ currentScore);
+};
+
+//Main Start: 
+//call start Game: 
+startGame();
+
+//add the values to the crystals. 
+$("#blue").click(function() {
+    addValues(crystal.blue);
+  });
+  
+  $("#red").click(function() {
+    addValues(crystal.red);
+  });
+  
+  $("#green").click(function() {
+    addValues(crystal.green);
+  });
+  
+  $("#yellow").click(function() {
+    addValues(crystal.yellow);
+  });
+  
+
